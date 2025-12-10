@@ -31,11 +31,12 @@ public class TextAdventure {
 
         //Print game start text
         System.out.println("Welcome to Escape the Bunker.");
-        System.out.println("Your goal is to escape the bunker before a slow death from hunger and thirst.");
-        System.out.println("You can type 'inventory' to print your inventory, and 'look' to remind yourself of your surroundings.");
-        System.out.println("Type help for a list of commands as a last resort before death.");
-        System.out.println("Have fun, and don't get caught by the… aflvbssksdsfdbgnfhdgsfa");
-        System.out.println("Connection Closed.");
+        System.out.println("Your goal is to escape the bunker before a slow death from hunger and thirst.\n");
+        System.out.println("Type 'inventory' to print your inventory.");
+        System.out.println("Type 'look' to remind yourself of your surroundings.");
+        System.out.println("Type 'help' for a list of commands as a last resort before death.\n");
+        System.out.println("Have fun, and don't get caught by the... aflvbssksdsfdbgnfhdgsfa");
+        System.out.println("Connection Closed.\n");
 
         System.out.println("Game Start.");
         System.out.println("You wake up in a daze.");

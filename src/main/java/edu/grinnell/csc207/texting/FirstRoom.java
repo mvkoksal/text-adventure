@@ -16,7 +16,7 @@ public class FirstRoom extends Parser {
     }
 
     public void lookAround() {
-        System.out.println("A worn carpet sprawls across the center of the room. ");
+        System.out.println("A worn carpet sprawls across the center of the room.");
         System.out.println("Nearby stands a delicate jewelry hanger, its metal frame slightly swaying as if someone touched it moments ago.");
         System.out.println("A tall mirror rests against the wall, its surface cloudy with dust.");
         System.out.println("A narrow, sealed window is set into one wall next to the mirror.");
@@ -124,7 +124,7 @@ public class FirstRoom extends Parser {
             System.out.println("You open the bottle of pills. There are 3 pills - green, blue and yellow - inside with a label.");
         } else if (object.equals("trapdoor")) {
             System.out.println("To your surprise, the trapdoor is unlocked! It opens easily with a pull on its handle.");
-            System.out.println("Inside, there's a bottle of pills, and tape.");
+            System.out.println("Inside, there's a tightly closed bottle of pills, and tape.");
         } else if (object.equals("door")) {
             System.out.println("The door has a 3-digit combination padlock.");
             openLock();
@@ -139,12 +139,11 @@ public class FirstRoom extends Parser {
             System.out.println("You wake up in a daze.");
         } else if (object.equals("blue pill")) {
             System.out.println("Your eyes burn and your vision blurs.");
-            System.out.println("Your head spins");
+            System.out.println("Your head spins..");
             System.out.println("Suddenly, the colors around you seem unfamiliar.");
             isVisionFiolet = true;
         } else if (object.equals("yellow pill")) {
             System.out.println("Your vision fades as you fall into a deep sleep...");
-            System.out.println("And you die.");
             isAlive = false;
         } else if (object.equals("pill")) {
             System.out.println("You're not sure what color of pill to eat.");
