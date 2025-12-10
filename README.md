@@ -1,13 +1,10 @@
-# CSC 207: Text Editor
+# CSC 207: Text Adventure
 
-**Author**: _(TODO: fill me in)_
+**Author**: Meryem Koksal
 
 ## Resources Used
 
-+ _(TODO: fill me in)_
-+ ...
-+ ...
++ The Project Write-Up: 
+https://osera.cs.grinnell.edu/ttap/data-structures-labs/text-adventure.html
 
 ## Changelog
-
-_(TODO: fill me in with a log of your committed changes)_

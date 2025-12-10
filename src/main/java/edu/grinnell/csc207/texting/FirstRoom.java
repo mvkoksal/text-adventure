@@ -1,12 +1,7 @@
 package edu.grinnell.csc207.texting;
-import java.util.Scanner;
-
 
 public class FirstRoom extends Parser {
-
-    public boolean isAlive;
     
-    private boolean doorUnlocked;
     private boolean isVisionFiolet;
 
     public static final int BEDROOM = 1;
@@ -43,18 +38,17 @@ public class FirstRoom extends Parser {
                 return LIVINGROOM;
             } else {
                 System.out.println("You approach the closed door...");
-                System.out.println("There is no lock on it, but seems like it's made of plywood");
                 return BEDROOM;
             }
         } else {
-            System.out.println("Walls all around you... except for north");
+            System.out.println("Walls all around you... except for the door on north.");
             return BEDROOM;
         }
 
     }
 
     public void talkTo(String object) {
-        System.out.println("You try talking to the " + object + ", doesn't seem to like communicating with humans");
+        System.out.println("You try talking to the " + object + ", doesn't seem to like communicating with humans.");
     }
 
     // returns the item dropped by the object being attacked if it drops something
@@ -66,7 +60,7 @@ public class FirstRoom extends Parser {
             System.out.println("You pop one, you pop two, and you don't stop there.");
             System.out.println("When you pop the last balloon, a single piece of paper falls out.");
         } else if (object.equals("jewelry")) {
-            System.out.println("Necklaces and earrings scatter to the floor");
+            System.out.println("Necklaces and earrings scatter to the floor.");
         } else if(object.equals("carpet")){
             System.out.println("You take the carpet off the floor and shake it in the air.");
             System.out.println("You catch a glimpse of a trapdoor under the carpet.");
@@ -78,20 +72,24 @@ public class FirstRoom extends Parser {
 
     public void lookAt(String object) {
         if (object.equals("carpet")) {
-            System.out.println("On a closer look, the carpet is crooked, as if it has been moved recently");
+            System.out.println("On a closer look, the carpet is crooked, as if it has been moved recently.");
         } else if (object.equals("mirror") && isVisionFiolet){
             System.out.println("You notice something you hadn't before on the mirror...");
-            System.out.println("A large red '4' seemingly written in blood");
+            System.out.println("A large red '4' seemingly written in blood.");
         } else if (object.equals("mirror")){
             System.out.println("You take a closer look at yourself in the mirror.");
-            System.out.println("You are looking pretty fine today");
-            System.out.println("Your attention goes to the reflection of the jewelry hanger behind you");
+            System.out.println("You are looking pretty fine today.");
+            System.out.println("Your attention goes to the reflection of the jewelry hanger behind you.");
         } else if (object.equals("slippers")) {
             System.out.println("On a close look, you realize these are pink bunny slippers! So cute!");
         } else if (object.equals("window")) {
-            System.out.println("You look at the window closely.. You notice a latch on the bottom");
+            System.out.println("You look at the window closely.. You notice a latch on the bottom.");
         } else if (object.equals("balloons")){
-            System.out.println("All the balloons are green, except for one - a red heart shaped balloon");
+            System.out.println("All the balloons are green, except for one - a red heart shaped balloon.");
+        } else if (object.equals("jewelry")) {
+            System.out.println("There are earrings and necklaces on the hanger, and...");
+            System.out.println("Is that a coffee capsule behind the jewelry hanger?");
+            System.out.println("You would give anything for a coffee right now.");
         } else {
             System.out.println("Just a regular " + object);
         }
@@ -104,7 +102,7 @@ public class FirstRoom extends Parser {
             System.out.println("The label reads  sleep - ..., ultraviolet - ..., poison - ...");
             System.out.println("The colors beside each word have faded beyond recognition.");
         } else {
-            System.out.println("Nothing to read here");
+            System.out.println("Nothing to read here.");
         }
     }
 
@@ -120,10 +118,9 @@ public class FirstRoom extends Parser {
             System.out.println("Inside, there's a bottle of pills, and tape.");
         } else if (object.equals("door")) {
             System.out.println("The door has a 3-digit combination padlock.");
-        } else if (object.equals("lock")) {
             openLock();
         } else {
-            System.out.println("Nothing to unlock here");
+            System.out.println("Nothing to unlock here.");
         }
     }
 
@@ -132,29 +129,28 @@ public class FirstRoom extends Parser {
             System.out.println("Your vision fades as you fall into a deep sleep...");
             System.out.println("You wake up in a daze.");
         } else if (object.equals("blue pill")) {
-            System.out.println("Your eyes burn and your vision blurs");
+            System.out.println("Your eyes burn and your vision blurs.");
             System.out.println("Your head spins");
-            System.out.println("Suddenly, the colors around you seem unfamiliar");
+            System.out.println("Suddenly, the colors around you seem unfamiliar.");
+            isVisionFiolet = true;
         } else if (object.equals("yellow pill")) {
             System.out.println("Your vision fades as you fall into a deep sleep...");
             System.out.println("And you die.");
             isAlive = false;
+        } else if (object.equals("pill")) {
+            System.out.println("You're not sure what color of pill to eat.");
         } else {
-            System.out.println("Nothing to eat here");
+            System.out.println("Nothing to eat here.");
         }
     }
 
     public void openLock() {
         System.out.println("Enter a 3-digit combination:");
-        Scanner scanner = new Scanner(System.in);
-        String combination = scanner.nextLine();
-        if (combination.equals("439")) {
-            System.out.println("Click.");
-            System.out.println("The door opens with a creak.");
-            doorUnlocked = true;
-        } else {
-            System.out.println("The lock does not budge");
-        }
-        scanner.close();
+        unlock("439");
     }
+
+    public void use(String item){
+        System.out.println("Nowhere to use that here.");
+    }
+
 }

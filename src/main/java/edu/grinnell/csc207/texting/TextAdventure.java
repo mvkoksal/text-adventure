@@ -8,6 +8,9 @@ public class TextAdventure {
     public static final int LIVINGROOM = 2;
     public static final int STORAGE = 3;
 
+    public static final int DEATH = 0;
+    public static final int ALIVE = 1;
+
     public static void main(String[] args) {
 
         // There's a door on the north side.
@@ -17,14 +20,27 @@ public class TextAdventure {
 
         // Initialize first room
         Parser bedroom = new FirstRoom();
-        //Parser livingroom = new SecondRoom();
-        //Parser storage = new ThirdRoom();
+        Parser livingroom = new SecondRoom();
+        Parser storage = new ThirdRoom();
 
         Parser room = bedroom;
 
         Inventory inventory = new Inventory(); 
 
         while(gameContinue) {
+            if (Parser.gameOver) {
+                System.out.println("Congratulations!");
+                System.out.println("You've escaped the bunker!");
+                System.out.println("What adventures await you now?");
+                System.out.println("And what was that growling sound you just heard?");
+                System.out.println("TO BE CONTINUED.");
+                break;
+            } else if (!Parser.isAlive) {
+                System.out.println("You have died.");
+                System.out.println("Try again next time.");
+                System.out.println("Toodles.");
+                break;
+            }
             String input = scanner.nextLine();
             String[] inputs = input.split(" ");
 
@@ -33,20 +49,24 @@ public class TextAdventure {
             } 
             String command = inputs[0];
             if (command.equals("wait")) {
-                room.waitHere();
+                int state = room.waiting();
+                if (state == DEATH) {
+                    System.out.println("You didn't survive the hunger and thirst after waiting for too long...");
+                    gameContinue = false;
+                }
             } else if (command.equals("go")) {
                 if (inputs.length == 1) {
                     System.out.println("You're not sure which way to go.");
                 } else {
                     String dir = inputs[1];
-                    if (dir == "north" || dir == "east" ||dir == "south" ||dir == "west") {
+                    if (dir.equals("north") || dir.equals("east") ||dir.equals("south")||dir.equals("west")) {
                         int newRoom = room.go(dir);
                         if (newRoom == BEDROOM) {
                             room = bedroom;
                         } else if (newRoom == LIVINGROOM) {
-                            //room = livingroom;
+                            room = livingroom;
                         } else if (newRoom == STORAGE) {
-                            //room = storage;
+                            room = storage;
                         } else {
                             //debugging
                             System.out.println("Error in the go command.");
@@ -72,17 +92,44 @@ public class TextAdventure {
                     System.out.println("You cannot talk with that...");
                 }
             } else if (command.equals("pick")) {
-                String phrasal = inputs[1]; //up
-                String object = inputs[2];
-                if (phrasal.equals("up")) {
-                    if (inventory.containsItem(object)) {
-                    System.out.println("You have already picked up this item");
-                    } else {
-                        inventory.pickUp(object);
-                    }
-                } 
+                if (inputs.length == 1) {
+                    System.out.println("You try to pick what you want to pick up...");
+                } else if (inputs.length == 3) {
+                    String phrasal = inputs[1]; //up
+                    String object = inputs[2];
+                    if (phrasal.equals("up")) {
+                        if (inventory.containsItem(object)) {
+                        System.out.println("You have already picked up this item.");
+                        } else {
+                            inventory.pickUp(object);
+                        }
+                    } 
+                } else if (inputs.length == 4) {
+                    // COFFEE CAPSULE
+                    String phrasal = inputs[1]; //up
+                    String object = inputs[2] + " " + inputs[3];
+                    inventory.pickUp(object);
+                } else {
+                    System.out.println("That's not possible.");
+                }
+                
             } else if (command.equals("use")) {
-
+                if (inputs.length == 1) {
+                    System.out.println("You wonder what to use...");
+                } else if (inputs.length == 2) {
+                    String object = inputs[1];
+                    if (inventory.use(object)) {
+                        room.use(object);
+                    }
+                } else if (inputs.length == 3) {
+                    String object = inputs[1] + inputs[2];
+                    // if in the inventory, remove and use it.
+                    if (inventory.use(object)) {
+                        room.use(object);
+                    }
+                } else {
+                    System.out.println("You can only use items in your inventory.");
+                }
             } else if (command.equals("attack")) {
                 if (inputs.length == 1) {
                     System.out.println("Nothing to attack here, just existential dread...");
@@ -96,8 +143,14 @@ public class TextAdventure {
                 if (inputs.length == 1) {
                     System.out.println("You look around.");
                     // INSERT THE INTRO TEXT HERE TOO, REMINDING EVERYONE OF THEIR SURROUNDINGS
+                } else if(inputs.length == 3) {
+                    String object = inputs[2];
+                    room.lookAt(object);
                 } else if(inputs.length == 2) {
                     String object = inputs[1];
+                    room.lookAt(object);
+                } else if (inputs.length == 4) {
+                    String object = inputs[2] + inputs[3];
                     room.lookAt(object);
                 } else {
                     System.out.println("Looking there doesn't help, you lose hope slowly...");
@@ -120,12 +173,12 @@ public class TextAdventure {
                     String object = inputs[1];
                     room.open(object);
                 } else {
-                    System.out.println("Seems unopenable");
+                    System.out.println("Command not recognized.");
                 }
             } else if (command.equals("eat")) {
                 if (inputs.length == 1) {
-                    System.out.println("You hunder as you look for something to eat.");
-                    System.out.println("You check your pockets - nothing but some crumbs.");
+                    System.out.println("You hunger as you look for something to eat.");
+                    System.out.println("You check your pockets - nothing but some cookie crumbs.");
                 } else if (inputs.length == 2) {
                     String object = inputs[1];
                     room.eat(object);
@@ -135,6 +188,8 @@ public class TextAdventure {
                     String color = inputs[2];
                     room.eat(object+ " " + color);
                 }
+            } else if (command.equals("inventory")) {
+                inventory.printInventory();
             } else if (command.equals("exit")) {
                 System.out.println("Giving up so quickly?"); 
                 System.out.println("Until next time then..."); 
