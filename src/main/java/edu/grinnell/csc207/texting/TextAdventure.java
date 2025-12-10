@@ -41,7 +41,7 @@ public class TextAdventure {
         System.out.println("Game Start.");
         System.out.println("You wake up in a daze.");
         System.out.println("You rub your eyes and look around.");
-        System.out.println("You're in a small bunker.");
+        System.out.println("You're in a small bunker, with no memory of how you got here.");
 
         while(gameContinue) {
             if (Parser.gameOver) {
