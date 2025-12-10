@@ -28,6 +28,7 @@ public abstract class Parser {
         }
     }
 
+    public abstract void lookAround();
     public abstract void waitHere();
     public abstract int go(String dir);
     public abstract void talkTo(String object);

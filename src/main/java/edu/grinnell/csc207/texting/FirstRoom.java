@@ -15,6 +15,15 @@ public class FirstRoom extends Parser {
         isVisionFiolet = false;
     }
 
+    public void lookAround() {
+        System.out.println("A worn carpet sprawls across the center of the room. ");
+        System.out.println("Nearby stands a delicate jewelry hanger, its metal frame slightly swaying as if someone touched it moments ago.");
+        System.out.println("A tall mirror rests against the wall, its surface cloudy with dust.");
+        System.out.println("A narrow, sealed window is set into one wall next to the mirror.");
+        System.out.println("Bright balloons float lazily near the ceiling, their colors strangely cheerful.");
+        System.out.println("You see a closed door to the north.");
+    }
+
     public void waitHere() {
         if (waitTime == 1) {
             System.out.println("Nothing but the slow tick of the old clock...");

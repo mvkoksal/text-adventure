@@ -18,14 +18,29 @@ public class TextAdventure {
         Scanner scanner = new Scanner(System.in);
         boolean gameContinue = true;
 
-        // Initialize first room
+        // Initialize the rooms
         Parser bedroom = new FirstRoom();
         Parser livingroom = new SecondRoom();
         Parser storage = new ThirdRoom();
 
+        // Start from the bedroom
         Parser room = bedroom;
 
         Inventory inventory = new Inventory(); 
+
+
+        //Print game start text
+        System.out.println("Welcome to Escape the Bunker.");
+        System.out.println("Your goal is to escape the bunker before a slow death from hunger and thirst.");
+        System.out.println("You can type 'inventory' to print your inventory, and 'look' to remind yourself of your surroundings.");
+        System.out.println("Type help for a list of commands as a last resort before death.");
+        System.out.println("Have fun, and don't get caught by the… aflvbssksdsfdbgnfhdgsfa");
+        System.out.println("Connection Closed.");
+
+        System.out.println("Game Start.");
+        System.out.println("You wake up in a daze.");
+        System.out.println("You rub your eyes and look around.");
+        System.out.println("You're in a small bunker.");
 
         while(gameContinue) {
             if (Parser.gameOver) {
@@ -141,8 +156,7 @@ public class TextAdventure {
                 }   
             } else if (command.equals("look")) {
                 if (inputs.length == 1) {
-                    System.out.println("You look around.");
-                    // INSERT THE INTRO TEXT HERE TOO, REMINDING EVERYONE OF THEIR SURROUNDINGS
+                    room.lookAround();
                 } else if(inputs.length == 3) {
                     String object = inputs[2];
                     room.lookAt(object);
@@ -194,6 +208,23 @@ public class TextAdventure {
                 System.out.println("Giving up so quickly?"); 
                 System.out.println("Until next time then..."); 
                 gameContinue = false;
+            } else if (command.equals("help")) {
+                System.out.println("look - look at your surroundings");
+                System.out.println("inventory - see your inventory");
+                System.out.println("exit - exit the game");
+
+                System.out.println("List of Commands");
+                System.out.println("------------------");
+                System.out.println("wait");
+                System.out.println("go <direction>");
+                System.out.println("talk to <object>");
+                System.out.println("pick up <item>");
+                System.out.println("use <item>");
+                System.out.println("attack <object>");
+                System.out.println("look at <object>");
+                System.out.println("read <object>");
+                System.out.println("open <object>");
+                System.out.println("eat <object>");
             } else {
                 System.out.println("Not a recognized command.");
             }
