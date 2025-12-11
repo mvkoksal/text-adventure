@@ -1,11 +1,8 @@
 package edu.grinnell.csc207.texting;
 
-public class ThirdRoom extends Parser {
+public class ThirdRoom extends Room {
+    
     private boolean ladderUp = false;
-
-    public static final int BEDROOM = 1;
-    public static final int LIVINGROOM = 2;
-    public static final int STORAGE = 3;
 
     public void lookAround() {
         System.out.println("A coffee machine buzzes softly in the corner.");

@@ -1,25 +1,14 @@
 package edu.grinnell.csc207.texting;
 
-public class FirstRoom extends Parser {
+public class FirstRoom extends Room {
     
+    // Whether the user has acquired UV vision
     private boolean isVisionFiolet;
 
-    public static final int BEDROOM = 1;
-    public static final int LIVINGROOM = 2;
-    public static final int STORAGE = 3;
-
-    /**
-     * Initializes the fields of the living room
-     */
     public FirstRoom() {
-        doorUnlocked = false;
-        isAlive = true;
         isVisionFiolet = false;
     }
 
-    /**
-     * Prints information about the user's surroundings.
-     */
     public void lookAround() {
         System.out.println("A worn carpet sprawls across the center of the room.");
         System.out.println("On a table in the corner stands a jewelry hanger, necklaces and earrings hanging from it.");
@@ -29,9 +18,6 @@ public class FirstRoom extends Parser {
         System.out.println("You see a closed door to the north.");
     }
 
-    /**
-     * Give information about the room three times.
-     */
     public void waitHere() {
         if (waitTime == 1) {
             System.out.println("Nothing but the slow tick of the old clock...");
@@ -50,21 +36,17 @@ public class FirstRoom extends Parser {
         }
     }
 
-
-    /**
-     * Take a direction and give corresponding info to the user.
-     * @param dir the direction the user wants to go
-     * @return the room the user is now in
-     */
     public int go(String dir) {
         if (dir.equals ("north")) { 
             if (doorUnlocked) {
                 System.out.println("You enter the living room.");
                 return LIVINGROOM;
+            
             } else {
                 System.out.println("You approach the closed door...");
                 return BEDROOM;
             }
+
         } else {
             System.out.println("Walls all around you... except for the door on north.");
             return BEDROOM;
@@ -72,18 +54,10 @@ public class FirstRoom extends Parser {
 
     }
 
-    /**
-     * Prints information corresponding to the object the user wants to talk to
-     * @param object the object the user wants to talk to
-     */
     public void talkTo(String object) {
         System.out.println("You try talking to the " + object + ", doesn't seem to like communicating with humans.");
     }
 
-    /**
-     * Prints info about what happens when the user attacks a certain object.
-     * @param object the object being attacked
-     */
     public void attack(String object) {
         if (object.equals("window")) {
             System.out.println("You give a punch to the window. It doesn't budge.");
@@ -105,10 +79,6 @@ public class FirstRoom extends Parser {
         }
     }
 
-    /**
-     * Prints more detailed information about an object when the user looks at it.
-     * @param object the object being looked at
-     */
     public void lookAt(String object) {
         if (object.equals("carpet")) {
             System.out.println("On a closer look, the carpet is crooked, as if it has been moved recently.");
@@ -142,10 +112,6 @@ public class FirstRoom extends Parser {
         }
     }
 
-    /**
-     * Prints information about the object being read
-     * @param object the object being read
-     */
     public void read(String object) {
         if (object.equals("paper")) {
             System.out.println("On the paper, there's a single digit written: 9"); 
@@ -159,11 +125,6 @@ public class FirstRoom extends Parser {
         }
     }
 
-
-    /**
-     * Prints information about what happens when the user opens something.
-     * @param object the object beind opened
-     */
     public void open(String object) {
         if (object.equals("latch")) {
             System.out.println("You pull the latch up, and manage to open up the window for an inch.");
@@ -188,10 +149,6 @@ public class FirstRoom extends Parser {
         }
     }
 
-    /**
-     * Prints information about what happens when the user eats something.
-     * @param object the thing being eaten
-     */
     public void eat(String object){
         if (object.equals("green pill")) {
             // Sleeping pill
@@ -220,21 +177,16 @@ public class FirstRoom extends Parser {
         }
     }
 
+    public boolean use(String item){
+        System.out.println("Nowhere to use that here.");
+        return false;
+    }
+
     /**
-     * Takes input, if correct input is given, unlocks the door to the living room
+     * Gets input, if correct input is given, unlocks the door to the living room
      */
     public void openLock() {
         System.out.println("Enter a 3-digit combination:");
         unlock("439");
-    }
-
-    /**
-     * Checks if the given item is usable in this room, prints information accordingly
-     * Precondition: The item should already be in the inventory
-     * @param item the item being used
-     */
-    public boolean use(String item){
-        System.out.println("Nowhere to use that here.");
-        return false;
     }
 }

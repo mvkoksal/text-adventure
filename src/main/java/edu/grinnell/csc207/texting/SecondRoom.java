@@ -1,13 +1,12 @@
 package edu.grinnell.csc207.texting;
 
-public class SecondRoom extends Parser {
-
-    public static final int BEDROOM = 1;
-    public static final int LIVINGROOM = 2;
-    public static final int STORAGE = 3;
+public class SecondRoom extends Room {
 
     private boolean computerOn = false;
 
+    /**
+     * Prints information about the user's surroundings.
+     */
     public void lookAround() {
         System.out.println("A bright industrial light washes the room in a harsh glow.");
         System.out.println("A ladder leans against the wall, and a desk with a computer, its screen completely black, rests nearby.");
@@ -15,6 +14,7 @@ public class SecondRoom extends Parser {
         System.out.println("A closed door stands to the east, with no other way out.");
     }
     
+
     public void waitHere() {
         if (waitTime == 1) {
             System.out.println("You sneeze as dust swirls in the room. Your eyes struggle to adjust to the white bright light of the living room.");

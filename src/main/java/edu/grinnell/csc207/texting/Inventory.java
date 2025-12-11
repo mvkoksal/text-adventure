@@ -7,10 +7,18 @@ public class Inventory {
     
     public HashMap<String, Integer> inventory;
 
+    /**
+     * Initializes the inventory
+     */
     public Inventory () {
         this.inventory = new HashMap<String, Integer>();
     }
 
+    /**
+     * Checks if the given item is possible to pickup.
+     * If so, adds item to the inventory
+     * @param item the given item by the user
+     */
     public void pickUp(String item) {
         if (item.equals("pills") ||
             item.equals("paper") ||
@@ -28,12 +36,20 @@ public class Inventory {
         }   
     }
 
-
-    // preconditon that item is in the inveneroy
+    /**
+     * Removes an item from the inventory
+     * As a precondition, the item should already be in the inventory
+     * @param item the item to remove
+     */
     public void remove(String item) {
         inventory.remove(item);
     }
 
+    /**
+     * Checks if the inventory contains an item
+     * @param item an item to search for
+     * @return true if the item is in the inventory, false otherwise
+     */
     public boolean containsItem(String item) {
         if (inventory.containsKey(item)) {
             return true;
@@ -42,6 +58,9 @@ public class Inventory {
         }
     }
 
+    /**
+     * Prints the current inventory
+     */
     public void printInventory() {
         Set<String> items = inventory.keySet();
         System.out.println("------------------");
