@@ -6,8 +6,6 @@ public class ThirdRoom extends Parser {
     public static final int BEDROOM = 1;
     public static final int LIVINGROOM = 2;
     public static final int STORAGE = 3;
-    
-private boolean trapdoorUnlocked = false;
 
     public void lookAround() {
         System.out.println("A coffee machine buzzes softly in the corner.");
@@ -37,12 +35,9 @@ private boolean trapdoorUnlocked = false;
             System.out.println("You enter the living room.");
             return LIVINGROOM;
         } else if (dir.equals("up")) {
-            if (trapdoorUnlocked) {
-                gameOver = true;
-            }
             if (ladderUp) {
                 System.out.println("You climb up the ladder.");
-                System.out.println("You trapdoor seems stuck.");
+                System.out.println("The trapdoor seems stuck.");
             } else {
                 System.out.println("Gravity keeps you on the floor.");
             }
@@ -66,10 +61,10 @@ private boolean trapdoorUnlocked = false;
                 System.out.println("You ram your shoulder into the ceiling trapdoor.");
                 System.out.println("It budges a little.");
                 System.out.println("You push up with all your power - and the trapdoor gives in, swinging open upwards.");
-                System.out.println("Sunlight floods the storage room, as you climb up the last few steps of the ladder out into the world.");
+                System.out.println("Sunlight floods the storage room, as you climb up the last few steps of the ladder out into the world.\n");
                 System.out.println("A growling sound comes from nearby that gives you the chills.");
-                System.out.println("Must be nothing, right?");
-                trapdoorUnlocked = true;
+                System.out.println("Must be nothing, right?\n\n");
+                gameOver = true;
             } else {
                 System.out.println("The trapdoor is out of your reach.");
             }
@@ -133,18 +128,21 @@ private boolean trapdoorUnlocked = false;
        System.out.println("Nothing to eat here.");
     }
 
-    public void use(String item){
+    public boolean use(String item){
         if (item.equals("ladder")) {
             System.out.println("You lean the ladder on the edge of the trapdoor on the ceiling.");
             System.out.println("It feels pretty stable.");
             ladderUp = true;
+            return true;
         } else if (item.equals("coffee capsule")){
             System.out.println("You put the capsule in the coffee machine and brew.");
             System.out.println("A deep earthy smell fills the room.");
             System.out.println("You really have missed this.");
             System.out.println("You take a sip and sigh.");
+            return true;
         } else {
             System.out.println("Nowhere to use that here.");
+            return false;
         }
     }
 }

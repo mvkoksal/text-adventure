@@ -14,7 +14,6 @@ public class TextAdventure {
     public static void main(String[] args) {
 
         // There's a door on the north side.
-
         Scanner scanner = new Scanner(System.in);
         boolean gameContinue = true;
 
@@ -35,6 +34,9 @@ public class TextAdventure {
         System.out.println("Type 'inventory' to print your inventory.");
         System.out.println("Type 'look' to remind yourself of your surroundings.");
         System.out.println("Type 'help' for a list of commands as a last resort before death.\n");
+        System.out.println("Use 'go north/south/east/west/up/down' to move in between rooms.");
+        System.out.println("Use 'look at' to move inside a room.");
+        System.out.println("Tip: 'wait' and 'look at <object>' can give you crucial hints to help you survive...\n");
         System.out.println("Have fun, and don't get caught by the... aflvbssksdsfdbgnfhdgsfa");
         System.out.println("Connection Closed.\n");
 
@@ -49,7 +51,7 @@ public class TextAdventure {
                 System.out.println("You've escaped the bunker!");
                 System.out.println("What adventures await you now?");
                 System.out.println("And what was that growling sound you just heard?");
-                System.out.println("TO BE CONTINUED.");
+                System.out.println("TO BE CONTINUED.\n\n");
                 break;
             } else if (!Parser.isAlive) {
                 System.out.println("You have died.");
@@ -65,17 +67,16 @@ public class TextAdventure {
             } 
             String command = inputs[0];
             if (command.equals("wait")) {
-                int state = room.waiting();
-                if (state == DEATH) {
-                    System.out.println("You didn't survive the hunger and thirst after waiting for too long...");
-                    gameContinue = false;
-                }
+                room.waiting();
+
             } else if (command.equals("go")) {
                 if (inputs.length == 1) {
                     System.out.println("You're not sure which way to go.");
                 } else {
                     String dir = inputs[1];
-                    if (dir.equals("north") || dir.equals("east") ||dir.equals("south")||dir.equals("west")) {
+                    if (dir.equals("north") || dir.equals("east") 
+                        || dir.equals("south")|| dir.equals("west")
+                        || dir.equals("up") || dir.equals("down")) {
                         int newRoom = room.go(dir);
                         if (newRoom == BEDROOM) {
                             room = bedroom;
@@ -134,15 +135,27 @@ public class TextAdventure {
                     System.out.println("You wonder what to use...");
                 } else if (inputs.length == 2) {
                     String object = inputs[1];
-                    if (inventory.use(object)) {
-                        room.use(object);
+
+                    if(inventory.containsItem(object)){
+                        if (room.use(object)) {
+                            inventory.remove(object);
+                        }
+                    } else {
+                        System.out.println("You do not have this item in your inventory.");
                     }
+
                 } else if (inputs.length == 3) {
                     String object = inputs[1] + inputs[2];
                     // if in the inventory, remove and use it.
-                    if (inventory.use(object)) {
-                        room.use(object);
+
+                    if(inventory.containsItem(object)){
+                        if (room.use(object)) {
+                            inventory.remove(object);
+                        }
+                    } else {
+                        System.out.println("You do not have this item in your inventory.");
                     }
+
                 } else {
                     System.out.println("You can only use items in your inventory.");
                 }
@@ -210,14 +223,14 @@ public class TextAdventure {
                 System.out.println("Until next time then..."); 
                 gameContinue = false;
             } else if (command.equals("help")) {
+                
+                System.out.println("List of Commands");
+                System.out.println("------------------");
                 System.out.println("look - look at your surroundings");
                 System.out.println("inventory - see your inventory");
                 System.out.println("exit - exit the game");
-
-                System.out.println("List of Commands");
                 System.out.println("------------------");
                 System.out.println("wait");
-                System.out.println("go <direction>");
                 System.out.println("talk to <object>");
                 System.out.println("pick up <item>");
                 System.out.println("use <item>");

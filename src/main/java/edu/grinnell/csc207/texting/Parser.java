@@ -18,13 +18,13 @@ public abstract class Parser {
         this.doorUnlocked = false;
     }
     
-    public int waiting() {
+    public void waiting() {
         waitTime +=1;
         if (waitTime > 3) { 
-            return DEATH;
+            System.out.println("You didn't survive the hunger and thirst after waiting for too long...");
+            isAlive = false;
         } else {
             waitHere();
-            return ALIVE;
         }
     }
 
@@ -36,7 +36,7 @@ public abstract class Parser {
     // // inventory methods
     // public abstract void pickUp(String dir);
     
-    public abstract void use(String item);
+    public abstract boolean use(String item);
     public abstract void attack(String object);
     public abstract void lookAt(String object);
     public abstract void read(String object);

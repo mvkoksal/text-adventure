@@ -28,14 +28,10 @@ public class Inventory {
         }   
     }
 
-    public boolean use(String item) {
-        if (containsItem(item)) {
-            inventory.remove(item);
-            return true;
-        } else {
-            System.out.println("You do not have this item in your inventory.");
-            return false;
-        }
+
+    // preconditon that item is in the inveneroy
+    public void remove(String item) {
+        inventory.remove(item);
     }
 
     public boolean containsItem(String item) {

@@ -22,9 +22,9 @@ public class FirstRoom extends Parser {
      */
     public void lookAround() {
         System.out.println("A worn carpet sprawls across the center of the room.");
-        System.out.println("Nearby stands a delicate jewelry hanger, its metal frame slightly swaying as if someone touched it moments ago.");
+        System.out.println("On a table in the corner stands a jewelry hanger, necklaces and earrings hanging from it.");
         System.out.println("A tall mirror rests against the wall, its surface cloudy with dust.");
-        System.out.println("A narrow, sealed window is set into one wall next to the mirror.");
+        System.out.println("A narrow, sealed window is set into one wall next to a bed.");
         System.out.println("Bright balloons float lazily near the ceiling, their colors strangely cheerful.");
         System.out.println("You see a closed door to the north.");
     }
@@ -133,10 +133,9 @@ public class FirstRoom extends Parser {
         } else if (object.equals("balloons")){
             System.out.println("All the balloons are green, except for one - a red heart shaped balloon.");
         
-        } else if (object.equals("jewelry")) {
+        } else if (object.equals("jewelry hanger")) {
             System.out.println("There are earrings and necklaces on the hanger, and...");
             System.out.println("Is that a coffee capsule behind the jewelry hanger?");
-            System.out.println("You would give anything for a coffee right now.");
         
         } else {
             System.out.println("Just a regular " + object);
@@ -166,17 +165,18 @@ public class FirstRoom extends Parser {
      * @param object the object beind opened
      */
     public void open(String object) {
-        if (object.equals("window")) {
+        if (object.equals("latch")) {
             System.out.println("You pull the latch up, and manage to open up the window for an inch.");
             System.out.println("On the window sill you see a single digit carved out: 3");
             System.out.println("The window shuts back down as you let the latch go.");
         
-        } else if (object.equals("bottle")) {
+        } else if (object.equals("bottle") || object.equals("bottle of pills")) {
             System.out.println("You open the bottle of pills. There are 3 pills - green, blue and yellow - inside with a label.");
-        
+            System.out.println("Better be careful before consuming these - the label looks like it would be helpful.");
+      
         } else if (object.equals("trapdoor")) {
             System.out.println("To your surprise, the trapdoor is unlocked! It opens easily with a pull on its handle.");
-            System.out.println("Inside, there's a tightly closed bottle of pills, and tape.");
+            System.out.println("Inside, there's a roll of tape, and a tightly closed bottle of pills.");
         
         } else if (object.equals("door")) {
             System.out.println("The door has a 3-digit combination padlock.");
@@ -200,8 +200,10 @@ public class FirstRoom extends Parser {
         
         } else if (object.equals("blue pill")) {
             System.out.println("Your eyes burn and your vision blurs.");
-            System.out.println("Your head spins..");
+            System.out.println("Your head spins as the room comes back into view..");
             System.out.println("Suddenly, the colors around you seem unfamiliar.");
+            System.out.println("The pill has given you UV vision.");
+            System.out.println("You sigh, that pill could've been the end of you.");
             // UV vision pill
             isVisionFiolet = true;
         
@@ -231,7 +233,8 @@ public class FirstRoom extends Parser {
      * Precondition: The item should already be in the inventory
      * @param item the item being used
      */
-    public void use(String item){
+    public boolean use(String item){
         System.out.println("Nowhere to use that here.");
+        return false;
     }
 }

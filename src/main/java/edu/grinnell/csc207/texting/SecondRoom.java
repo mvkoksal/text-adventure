@@ -39,6 +39,9 @@ public class SecondRoom extends Parser {
                 System.out.println("You approach the closed door...");
                 return LIVINGROOM;
             }
+        } else if(dir.equals("south")) {
+            System.out.println("You enter the bedroom.");
+            return BEDROOM;
         } else {
             System.out.println("Walls all around you... except for the door to the bedroom on the south and a new door on the east.");
             return LIVINGROOM;
@@ -67,8 +70,8 @@ public class SecondRoom extends Parser {
             System.out.println("Looks like it has been slept in very recently...");
         } else if (object.equals("ladder")) {
             System.out.println("A pretty sturdy ladder made of wood.");
-        } else if (object.equals("cable")) {
-            System.out.println("The cable seems to be split into two.");
+        } else if (object.equals("computer")) {
+            System.out.println("The computer cable seems to be split into two.");
         } else {
             System.out.println("Just a regular " + object + ".");
         }
@@ -105,13 +108,15 @@ public class SecondRoom extends Parser {
     }
         
     // preconditions : object is a valid object from the inventory
-    public void use(String item) {
+    public boolean use(String item) {
         if (item.equals("tape")){
             System.out.println("You tape the two ends of the cable together with the tape.");
-            System.out.println("The computer screen lights up. Some text appear on the screen.");
+            System.out.println("The computer screen lights up. Some text appears on the screen.");
             computerOn = true;
+            return true;
         } else {
             System.out.println("Nowhere to use that here.");
+            return false;
         }
     }
 }
